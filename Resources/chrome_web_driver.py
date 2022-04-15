@@ -20,6 +20,7 @@ class ChromeBrowser(unittest.TestCase):
         options.add_argument("--disable-setuid-sandbox")
         options.add_argument("--disable-webgl")
         options.add_argument("--disable-popup-blocking")
+        options.add_argument("--app-cache-force-enabled")
         options.binary_location = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 
         return options

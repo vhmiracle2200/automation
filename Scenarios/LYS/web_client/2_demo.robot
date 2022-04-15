@@ -18,7 +18,7 @@ buy_product_demo
 #    [Tags]   buy_product_demo
     [Tags]   exclude_folder
     Chrome Setup
-    Recorder Start      buy_product_demo
+    Recorder Start      buy_product_chrome_demo
 
 
     sleep       5

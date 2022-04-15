@@ -20,7 +20,7 @@ class _WaitingKeywords(KeywordGroup):
         def check_visibility():
             visible = self._is_visible(locator)
             if visible:
-                return
+                return True
             elif visible is None:
                 return error or "Element locator '%s' did not match any elements after %s" % (locator, self._format_timeout(timeout))
             else:

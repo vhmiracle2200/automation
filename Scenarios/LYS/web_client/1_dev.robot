@@ -18,13 +18,17 @@ buy_product_dev
 
     [Tags]   buy_product_dev
     Chrome Setup
-    Recorder Start      buy_product_dev
+    Recorder Start      buy_product_chrome_web_dev
 
 
     sleep       5
 
     # Click to Product
-    click       ${sample_product}
+    run script      window.scrollTo(0,247.3333282470703)
+    run script      window.scrollTo(0,580.6666870117188)
+    run script      window.scrollTo(0,920)
+    click       css=.col-sm-6:nth-child(12) .v-responsive__sizer
+#    click       ${sample_product}
 
     # Choose days
     click       ${choose_days}
@@ -92,6 +96,6 @@ buy_product_dev
     click    ${end_of_pay_back_to_home}
 
 
-    [Teardown]    Run Keywords       Kill Browser      Recorder Stop
+#    [Teardown]    Run Keywords       Kill Browser      Recorder Stop
 
 

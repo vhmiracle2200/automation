@@ -166,11 +166,10 @@ _VideoRecorder
     [Return]       ${result}
 
 Test Setup For Android
-        [Arguments]    ${android_emulator_name}       ${appium_port}
+        [Arguments]    ${android_emulator_name}       ${appium_port}   ${movie_name}
          Run Genymobile Vm   ${android_emulator_name}     ${appium_port}
-
-
          Check Appium On Local Port   ${android_emulator_name}     ${appium_port}
+         Recorder Start  ${movie_name}
 
 Test Setup For Web
         [Arguments]    ${WEB_URL}       ${port}
@@ -181,7 +180,7 @@ Chrome Setup
              ${chromeOptions}    ChromeBrowser  ${CHROME_LOCAL_PORT}   ${CONNECT_TO_EXISTING_BROWSER}
 #             setSpeedAndWait     1000
              Create Webdriver    Chrome  chrome_options=${chromeOptions}
-             Wait Untill page load      Term & Conditions
+             Wait Untill page load      About Us
              Set Selenium Speed      2
 
 Recorder Start

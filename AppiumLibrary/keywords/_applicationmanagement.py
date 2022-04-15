@@ -53,11 +53,9 @@ class _ApplicationManagementKeywords(KeywordGroup):
 
         desired_caps = kwargs
         print(webdriver)
-
         application = webdriver.Remote(str(remote_url), desired_caps)
-        print('baed kiiiir')
         self._debug('Opened application with session id %s' % application.session_id)
-
+        self.switch_application(alias)
         return self._cache.register(application, alias)
 
     def switch_application(self, index_or_alias):

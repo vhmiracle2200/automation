@@ -1,8 +1,8 @@
 # this file use  for constant tag define by XPATH
 
 *** Variables ***
-${sample_product}    xpath=//div[@id='__layout']/div/div/div/div/div/div/a/div/div/div/div[3]
-${choose_days}    xpath=//div[@id='__layout']/div/div/div/main/div/div/div[2]/div/div[2]/div[2]/label/div/div/div/div/input
+${sample_product}    xpath=//*[@class='Balanced Diet']
+${choose_days}    id=input-472
 
 ${valid_postal_code}          NW10 6PU
 ${Postalcode_input}    //div[@id='__layout']/div/div[2]/div[2]/div/div/div[2]/div[2]/label/div/div/div/div/input
