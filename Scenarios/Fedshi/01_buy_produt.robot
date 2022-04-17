@@ -14,7 +14,9 @@ ${Fedshi_app}       none
 
 *** Test Cases ***
 
-Buy simple product in Fedshi android dev
+Buy simple product in Fedshi android demo
+
+  [Tags]   buy_product_Fedshi_android_demo
 
   Wait Until Keyword Succeeds    500x    5s    Run Keyword and Return Log  Run  adb devices
 
@@ -47,38 +49,38 @@ Buy simple product in Fedshi android dev
   Sleep  1s
 
 # click continue
-  wait until element is visible         //*[@class = 'android.widget.TextView' and (@text = 'استمر' or . = 'استمر') and @resource-id = 'com.fedshi.res.dev:id/kds_button_text']
+  wait until element is visible         //*[@class = 'android.widget.TextView' and (@text = 'استمر' or . = 'استمر') and @resource-id = 'com.fedshi.res.dev:id/kds_button_text']  10
   click element         //*[@class = 'android.widget.TextView' and (@text = 'استمر' or . = 'استمر') and @resource-id = 'com.fedshi.res.dev:id/kds_button_text']
   Sleep  1s
 
 # choose first address
-  wait until element is visible         //*[@class = 'android.view.ViewGroup' and (@text = '' or . = '')]
+  wait until element is visible         //*[@class = 'android.view.ViewGroup' and (@text = '' or . = '')]  10
   click element         //*[@class = 'android.view.ViewGroup' and (@text = '' or . = '')]
-  Sleep  1s
+  Sleep  3s
 
 # Continue in shipping
   click element         com.fedshi.res.dev:id/kds_button_text
   Sleep  3s
 
 # Confirm pay money on receive porduct
-  wait until element is visible        //*[@class = 'android.widget.TextView' and (@text = 'الدفع عند الاستلام' or . = 'الدفع عند الاستلام') and @resource-id = 'com.fedshi.res.dev:id/kds_fillable_text']
+  wait until element is visible        //*[@class = 'android.widget.TextView' and (@text = 'الدفع عند الاستلام' or . = 'الدفع عند الاستلام') and @resource-id = 'com.fedshi.res.dev:id/kds_fillable_text']  5
   click element         com.fedshi.res.dev:id/btnContinue
-  Sleep  1s
+  Sleep  3s
 
 # Confirm summary
   wait until element is visible        //*[@class = 'android.widget.TextView' and (@text = 'تفاصيل الطلب' or . = 'تفاصيل الطلب')]
   click element         com.fedshi.res.dev:id/kds_button_text
-  Sleep  1s
+  Sleep  3s
 
 # Confirm confirmation
   wait until element is visible        //*[@class = 'android.widget.TextView' and (@text = 'تأكيد' or . = 'تأكيد') and @resource-id = 'com.fedshi.res.dev:id/title']
   click element         com.fedshi.res.dev:id/button_2
-  Sleep  1s
+  Sleep  3s
 
 # Back to orders view
   wait until element is visible        //*[@class = 'android.widget.TextView' and (@text = 'عرض التفاصيل' or . = 'عرض التفاصيل') and @resource-id = 'com.fedshi.res.dev:id/view_detail']
   click element         //*[@class = 'android.widget.TextView' and (@text = 'عرض التفاصيل' or . = 'عرض التفاصيل') and @resource-id = 'com.fedshi.res.dev:id/view_detail']
-  Sleep  1s
+  Sleep  3s
 
   Sleep  3s
   [Teardown]    Run Keywords       Kill Android      Recorder Stop

@@ -14,7 +14,9 @@ ${lys_app}       none
 
 *** Test Cases ***
 
-Buy simple product in lys android
+Buy sample product in lys android
+
+  [Tags]   buy_product_LYS_android_demo
 
   Wait Until Keyword Succeeds    500x    5s    Run Keyword and Return Log  Run  adb devices
 

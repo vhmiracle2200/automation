@@ -170,6 +170,7 @@ Test Setup For Android
          Run Genymobile Vm   ${android_emulator_name}     ${appium_port}
          Check Appium On Local Port   ${android_emulator_name}     ${appium_port}
          Recorder Start  ${movie_name}
+#         Set Appium Timetout  10
 
 Test Setup For Web
         [Arguments]    ${WEB_URL}       ${port}
@@ -181,7 +182,7 @@ Chrome Setup
 #             setSpeedAndWait     1000
              Create Webdriver    Chrome  chrome_options=${chromeOptions}
              Wait Untill page load      About Us
-             Set Selenium Speed      2
+             Set Selenium Speed      1.5
 
 Recorder Start
              [Arguments]    ${video_name}
@@ -202,4 +203,3 @@ Run Keyword and Return Log
     Log    ${status}
     ${return code}=    Set Variable If    "${status}" == "PASS"    0    -1
     Should Contain  ${output}  device
-#    [Return]    ${output}    ${return code}  ${is_matched}
