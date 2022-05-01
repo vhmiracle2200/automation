@@ -22,12 +22,12 @@ Buy sample product on web client
 
 
     click    xpath=//div[@id='__layout']/div/div/div/div/div/div/div/a/div[2]/p
-    click    id=input-512
+    click    id=input-524
     click    xpath=//div[@id='__layout']/div/div[2]/div[2]/div/div/div[3]/button[2]/div/p
     click    xpath=//div[@id='__layout']/div/div/div/main/div/div/div[2]/button/div/p
     click    xpath=(.//*[normalize-space(text()) and normalize-space(.)='Shop'])[1]/following::*[name()='svg'][1]
-    click    xpath=//div[@id='__layout']/div/div/div/main/div[2]/div[2]/a/div/p
-    click    xpath=//div[@id='__layout']/div/div/div/div/form/main/div[2]/div/div/label/div/div/div/div/div/div
+    click    xpath=(.//*[normalize-space(text()) and normalize-space(.)='Contact us'])[1]/following::*[name()='svg'][1]
+    click    xpath=//div[@id='__layout']/div/div/div/main/div[2]/div[2]/a/div
     click    xpath=//div[@id='list-item-677-0']/div/div/p
     click    xpath=//div[@id='__layout']/div/div/div/div/form/main/div[2]/div/div[3]/label/div/div/div/div/div[2]/div
     click    xpath=//div[@id='list-item-683-0']/div/div/ul[2]/li

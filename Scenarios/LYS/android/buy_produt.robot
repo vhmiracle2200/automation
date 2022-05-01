@@ -7,16 +7,21 @@ Resource    xpath.robot
 Library   Process
 Library   OperatingSystem
 
-Test Setup           Test Setup For Android    ${ANDDROID_EMULATOR_NAME}    ${APPIUM_PORT}  LYS_android
+Suite Setup     Test Setup For Android    ${ANDDROID_EMULATOR_NAME}    ${APPIUM_PORT}  LYS_android
+
 
 *** Variables ***
 ${lys_app}       none
+${testcase_spec}
 
 *** Test Cases ***
 
-Buy sample product in lys android
+2320_Buy sample product in lys android
 
-  [Tags]   buy_product_LYS_android_demo
+  [Tags]   buy_product_LYS_android_demo id=2320
+
+  Log  ${TEST NAME}
+  ${testcase_spec}   Get Testcase From Testrail By Id   2320
 
   Wait Until Keyword Succeeds    500x    5s    Run Keyword and Return Log  Run  adb devices
 
@@ -116,13 +121,26 @@ Buy sample product in lys android
   Sleep  1s
 
 # Confirm confirmation
-  wait until element is visible        com.lys.android:id/checkbox
-  click element         com.lys.android:id/button_2
-  Sleep  1s
-
+#  wait until element is visible        com.lys.android:id/checkbox
+#  click element         com.lys.android:id/button_2
+#  Sleep  1s
 
   Sleep  3s
-  [Teardown]    Run Keywords       Kill Android      Recorder Stop
+  [Teardown]  Run Keywords  Add Result To Testrail
+
+
+2321_Search sample product
+
+  [Tags]   Search sample product _LYS_android_demo id=2321
+  ${lys_app}     Open Test Application
+  wait until element is visible     //*[@class = 'android.view.ViewGroup' and @resource-id = 'com.lys.android:id/parent' and (@text = '' or . = '')]
+  Input Text    //*[@class = 'android.widget.EditText' and (@text = '' or . = '')]  balanced diet
+  Sleep  1s
+  element should be visible     //*[@class = 'android.view.ViewGroup' and @resource-id = 'com.lys.android:id/parent' and (@text = '' or . = '')]
+  Sleep  3s
+  [Teardown]  Run Keywords  Add Result To Testrail
+
+
 
 *** Keywords ***
 Open Test Application

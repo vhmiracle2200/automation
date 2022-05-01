@@ -7,6 +7,7 @@ Resource       config.robot
 Library        video_recorder.py
 Library        setup_for_web.py
 Library        setup_for_android.py
+Library        testrail.py
 
 *** Keywords ***
 open
@@ -176,7 +177,6 @@ Test Setup For Web
         [Arguments]    ${WEB_URL}       ${port}
          Run Chrome On Local Port   ${WEB_URL}     ${port}
 
-
 Chrome Setup
              ${chromeOptions}    ChromeBrowser  ${CHROME_LOCAL_PORT}   ${CONNECT_TO_EXISTING_BROWSER}
 #             setSpeedAndWait     1000
@@ -203,3 +203,16 @@ Run Keyword and Return Log
     Log    ${status}
     ${return code}=    Set Variable If    "${status}" == "PASS"    0    -1
     Should Contain  ${output}  device
+
+Get Testcase From Testrail By Id
+             [Arguments]    ${testcase_id}
+             Get Testcase By Id      ${testcase_id}
+             [Return]       ${testcase_spec}
+
+Set Current Testcase Inputs
+            [Arguments]    ${testrun_id}  ${testcase_id}  ${testcase_status}  ${testcase_status_comment}
+             Set Testcase Inputs
+
+Add Result To Testrail
+    Set Testcase Inputs   ${testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
+    Set Testcase Result By Id
