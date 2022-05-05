@@ -645,7 +645,7 @@ class _ElementKeywords(KeywordGroup):
         source_norm = normalize('NFD', self.get_source())
         return text_norm in source_norm
 
-    def _is_element_present(self, locator):
+    def is_element_present(self, locator):
         application = self._current_application()
         elements = self.element_finder.find(application, locator, None)
         return len(elements) > 0

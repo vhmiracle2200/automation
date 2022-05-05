@@ -54,7 +54,7 @@ verifyElementPresent
     [Arguments]                  ${element}
     Page Should Contain Element  ${element}
 
-verifyVisible
+wait until page contains element
     [Arguments]                  ${element}
     Page Should Contain Element  ${element}
 
@@ -152,11 +152,6 @@ verifyAlert
     [Arguments]              ${value}
     Alert Should Be Present  ${value}
 
-_ChromeBrowser
-    [Arguments]           ${port}   ${connect_existing}
-    ${result} =    create_chrome      ${port}    ${connect_existing}
-    [Return]       ${result}
-
 Wait Untill page load
     [Arguments]    ${time}
     Wait Until Page Contains       ${time}
@@ -171,18 +166,7 @@ Test Setup For Android
          Run Genymobile Vm   ${android_emulator_name}     ${appium_port}
          Check Appium On Local Port   ${android_emulator_name}     ${appium_port}
          Recorder Start  ${movie_name}
-#         Set Appium Timetout  10
 
-Test Setup For Web
-        [Arguments]    ${WEB_URL}       ${port}
-         Run Chrome On Local Port   ${WEB_URL}     ${port}
-
-Chrome Setup
-             ${chromeOptions}    ChromeBrowser  ${CHROME_LOCAL_PORT}   ${CONNECT_TO_EXISTING_BROWSER}
-#             setSpeedAndWait     1000
-             Create Webdriver    Chrome  chrome_options=${chromeOptions}
-             Wait Untill page load      About Us
-             Set Selenium Speed      1.5
 
 Recorder Start
              [Arguments]    ${video_name}
@@ -213,6 +197,17 @@ Set Current Testcase Inputs
             [Arguments]    ${testrun_id}  ${testcase_id}  ${testcase_status}  ${testcase_status_comment}
              Set Testcase Inputs
 
-Add Result To Testrail
-    Set Testcase Inputs   ${testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
+Add Result To Testrail Lys
+    Set Testcase Inputs   ${LYS_testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
     Set Testcase Result By Id
+
+Add Result To Testrail Fedshi
+    Set Testcase Inputs   ${Fedshi_testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
+    Set Testcase Result By Id
+
+Android Setup Be Completed
+    Android Setup Completed
+
+Get Android Setup Status
+    ${android_status}  Get Android Is Setup
+    [Return]       ${android_status}

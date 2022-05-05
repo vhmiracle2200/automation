@@ -126,7 +126,6 @@ def set_testcase_inputs(testrun_id=APIClient.current_test_run_id,
     APIClient.current_testcase_status_comment = testcase_comment
 
 
-
 def get_testcase_by_id(testcase_id):
     testcase_spec = APIClient.connected_client.send_get('get_case/' + testcase_id)
     print(testcase_spec)

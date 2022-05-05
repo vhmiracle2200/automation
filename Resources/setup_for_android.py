@@ -4,6 +4,8 @@ import threading
 
 
 class Android:
+
+    android_is_setup = False
     android_thread = threading.Thread()
 
     def __init__(self, android_emulator_name, appium_port):
@@ -11,7 +13,7 @@ class Android:
         self.android_emulator_name = android_emulator_name
 
     def run_appium(self):
-        os.system('appium  --base-path /wd/hub')
+        os.system('appium  --base-path /wd/hub --log-level debug')
 
     def execute_genymobile_vm_emulator(self):
         kill_adb_thread()
@@ -38,3 +40,9 @@ def kill_android_thread():
 
 def kill_adb_thread():
     subprocess.call("TASKKILL /f  /IM  adb.exe")
+
+def android_setup_completed():
+    Android.android_is_setup = True
+
+def get_android_is_setup():
+    return(Android.android_is_setup)

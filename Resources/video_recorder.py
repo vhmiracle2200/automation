@@ -12,8 +12,6 @@ import mss
 from pynput.mouse import Controller
 
 
-# -
-
 class UsageError(Exception):
     def __init__(self, msg):
         self.msg = msg
