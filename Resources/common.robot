@@ -2,10 +2,8 @@
 ${recorder_obj}
 
 *** Settings ***
-Library        chrome_web_driver.py
 Resource       config.robot
 Library        video_recorder.py
-Library        setup_for_web.py
 Library        setup_for_android.py
 Library        testrail.py
 
@@ -193,16 +191,31 @@ Get Testcase From Testrail By Id
              Get Testcase By Id      ${testcase_id}
              [Return]       ${testcase_spec}
 
+Create Testcase With Params
+             [Arguments]    ${section_id}  ${title}  ${type_id}  ${priority_id}
+             ${testcase_params}  Create Test Case    ${section_id}  ${title}  ${type_id}  ${priority_id}
+             ${testcase_id}=   evaluate   $testcase_params.get("id")
+             ${testcase_id}=  Convert To String  ${testcase_id}
+             ${testcase_spec}   Get Testcase From Testrail By Id   ${testcase_id}
+             [Return]       ${testcase_id}
+
+Checking Testcase
+  [Arguments]    ${section_id}  ${title}  ${type_id}  ${priority_id}
+
+  [Return]       ${testcase_params}
+
 Set Current Testcase Inputs
             [Arguments]    ${testrun_id}  ${testcase_id}  ${testcase_status}  ${testcase_status_comment}
              Set Testcase Inputs
 
 Add Result To Testrail Lys
-    Set Testcase Inputs   ${LYS_testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
+    [Arguments]    ${testcase_id}
+    Set Testcase Inputs   ${LYS_testrun_id}  ${testcase_id}  ${TEST STATUS}  ${TEST MESSAGE}
     Set Testcase Result By Id
 
 Add Result To Testrail Fedshi
-    Set Testcase Inputs   ${Fedshi_testrun_id}  ${TEST NAME}  ${TEST STATUS}  ${TEST MESSAGE}
+    [Arguments]    ${testcase_id}
+    Set Testcase Inputs   ${Fedshi_testrun_id}  ${testcase_id}  ${TEST STATUS}  ${TEST MESSAGE}
     Set Testcase Result By Id
 
 Android Setup Be Completed

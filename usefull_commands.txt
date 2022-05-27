@@ -1,0 +1,6 @@
+enable-disable_virtualization
+bcdedit / set hypervisorlaunchtype on auto
+bcdedit / set hypervisorlaunchtype off
+--------------------------------------------------------
+run_docker_for_healenium
+docker-compose up -d

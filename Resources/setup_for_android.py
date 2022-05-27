@@ -13,7 +13,7 @@ class Android:
         self.android_emulator_name = android_emulator_name
 
     def run_appium(self):
-        os.system('appium  --base-path /wd/hub --log-level debug')
+        os.system('appium  --base-path /wd/hub --log-level error')
 
     def execute_genymobile_vm_emulator(self):
         kill_adb_thread()

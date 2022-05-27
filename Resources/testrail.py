@@ -19,9 +19,35 @@ import requests
 
 
 class APIClient:
+
+
+    testcase_template = {
+              "title": "This is a test case",
+              "type_id": 1,
+              "priority_id": 3,
+              "estimate": "3m",
+              "refs": "RF-1, RF-2",
+              "custom_steps_separated": [
+                {
+                  "content": "Step 1",
+                  "expected": "Expected Result 1"
+                },
+                {
+                  "content": "Step 2",
+                  "expected": "Expected Result 2"
+                },
+                {
+                  "shared_step_id": 3
+                 },
+
+              ]
+
+            }
     connected_client = None
+    existing_test_cases = None
     current_test_run_id = None
     current_testcase_name = None
+    current_testcase_id = None
     current_testcase_status = None
     current_testcase_status_comment = None
 
@@ -107,21 +133,22 @@ class APIError(Exception):
     pass
 
 
-def login_to_testrail_server(url, username, password):
+def login_to_testrail_server(url, username, password, project_id):
 
     client = APIClient(url)
     client.user = username
     client.password = password
     APIClient.connected_client = client
-
+    APIClient.existing_test_cases = APIClient.connected_client.send_get('get_cases/' + project_id )
+    print (APIClient.existing_test_cases)
 
 def set_testcase_inputs(testrun_id=APIClient.current_test_run_id,
-                        testcase_id=APIClient.current_testcase_name,
+                        testcase_id=APIClient.current_testcase_id,
                         testcase_status= APIClient.current_testcase_status,
                         testcase_comment= APIClient.current_testcase_status_comment
                         ):
     APIClient.current_test_run_id = testrun_id
-    APIClient.current_testcase_name = testcase_id
+    APIClient.current_testcase_id = testcase_id
     APIClient.current_testcase_status = testcase_status
     APIClient.current_testcase_status_comment = testcase_comment
 
@@ -131,6 +158,29 @@ def get_testcase_by_id(testcase_id):
     print(testcase_spec)
     return testcase_spec
 
+def create_test_case(section_id, title ,type_id, priority_id):
+
+    testcase_template =  APIClient.testcase_template
+    testcase_template['title'] = title
+    testcase_template['type_id'] = type_id
+    testcase_template['priority_id'] = priority_id
+    # testcase_template['estimate']
+    # testcase_template['refs']
+    test_case_exist = False
+    result = None
+    for case in APIClient.existing_test_cases['cases']:
+        if title in case['title']:
+            print (case)
+            test_case_exist = True
+            result = case
+            break
+
+    if not test_case_exist:
+        result = APIClient.connected_client.send_post \
+            ('add_case/' + section_id ,
+             testcase_template)
+
+    return result
 
 def set_testcase_result_by_id():
     # pass = 1 , failed = 5 , retest = 4 , retest = 3 , blocked = 2
@@ -141,12 +191,11 @@ def set_testcase_result_by_id():
 
     result = APIClient.connected_client.send_post(
         'add_result_for_case/' + APIClient.current_test_run_id + '/' +
-        APIClient.current_testcase_name.split('_')[0],
+        APIClient.current_testcase_id,
         {'status_id': test_status,
          'comment': APIClient.current_testcase_status_comment}
     )
-    logging.info('Testrail testcase  wih id ' + APIClient.current_testcase_name.split('_')[0] +
+    logging.info('Testrail testcase  wih id ' + APIClient.current_testcase_id +
                  ' with state ' + APIClient.current_testcase_status +
                  ' with message ' + APIClient.current_testcase_status_comment + ' is updated.')
-
     return result

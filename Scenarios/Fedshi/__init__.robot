@@ -26,7 +26,7 @@ Suit Teardown
     Run Keywords    Recorder Stop
 
 Suit Setup
-    Login To Testrail Server  ${TESTRAIL_URL}  ${TESTRAIL_USERNAME}  ${TESTRAIL_PASSWORD}
+    Login To Testrail Server  ${TESTRAIL_URL}  ${TESTRAIL_USERNAME}  ${TESTRAIL_PASSWORD}  ${Fedshi_project_id}
     Wait Until Keyword Succeeds    500x    5s    Run Keyword and Return Log  Run  adb devices
     Test Setup For Android    ${ANDDROID_EMULATOR_NAME}    ${APPIUM_PORT}  TestResults/Fedshi_android
     Set Appium Timeout  15

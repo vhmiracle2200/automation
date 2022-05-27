@@ -10,7 +10,8 @@ Resource          ../../../Resources/common.robot
 *** Keyword ***
 
 Suit Teardown
-    Run Keywords   Kill Browser    Recorder Stop  Kill Android
+    Run Keywords   Recorder Stop  Kill Android
+#    Run Keywords   Kill Browser
 
 *** Test Cases ***
 6666_ This suit is created for ending all suits

@@ -7,13 +7,15 @@ Resource    ../../../Resources/common.robot
 *** Variables ***
 ${lys_app}       none
 ${testcase_spec}  None
+${testcase_params}
+${testcase_id}
 
 *** Test Cases ***
 
 2320_Buy sample product in lys android
 
-  [Tags]   include
-  ${testcase_spec}   Get Testcase From Testrail By Id   2320
+  [Tags]   exclude
+  ${testcase_id}   Create Testcase With Params   ${LYS_shop_section_id}  Buy sample product in lys android  1  3
 
   ${lys_app}     Open Test Application
   sleep  3s
@@ -117,12 +119,14 @@ ${testcase_spec}  None
 #  Sleep  1s
 
   Sleep  3s
-  [Teardown]  Run Keywords  Add Result To Testrail Lys
+  [Teardown]  Add Result To Testrail Lys  ${testcase_id}
 
 
 2321_Search sample product
 
-  [Tags]   include
+  [Tags]   exclude
+  ${testcase_id}   Create Testcase With Params   ${LYS_shop_section_id}  Search sample product  1  3
+
   ${lys_app}     Open Test Application
   sleep  3s
 
@@ -133,7 +137,7 @@ ${testcase_spec}  None
 #  element should be visible     //*[@class = 'android.view.ViewGroup' and @resource-id = 'com.lys.android:id/parent' and (@text = '' or . = '')]
   verifyElementPresent   //*[@class = 'android.view.ViewGroup' and @resource-id = 'com.lys.android:id/parent' and (@text = '' or . = '')]
   Sleep  3s
-  [Teardown]  Run Keywords  Add Result To Testrail Lys
+  [Teardown]  Run Keywords  Add Result To Testrail Lys  ${testcase_id}
 
 *** Keywords ***
 Open Test Application

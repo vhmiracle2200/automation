@@ -3,6 +3,7 @@ Documentation  Simple example using SeleniumLibrary
 Library     SeleniumLibrary
 Resource    lys_web_xpath.robot
 Resource          ../../../Resources/common.robot
+Resource          ../../../Resources/common_web.robot
 
 *** Variables ***
 ${testcase_spec}  None
@@ -11,13 +12,17 @@ ${testcase_spec}  None
 *** Test Cases ***
 2323_Buy sample product on web client
 
-    [Tags]   include
-    ${testcase_spec}   Get Testcase From Testrail By Id   2323
-    sleep  3s
-
-    wait until element is visible  xpath=//div[@id='__layout']/div/div/div/div/div/div/div/a/div/div/div/div[3]
-    click  xpath=//div[@id='__layout']/div/div/div/div/div/div/div/a/div/div/div/div[3]
-    click  id=input-525
+    [Tags]   exclude
+    ${testcase_id}   Create Testcase With Params   ${LYS_shop_section_id}  Buy sample product on web client  1  3
+#    wait until element is visible  xpath=//div[contains(text(),'Fresh Meal Plans')]
+    sleep  5
+    scroll element into view  //p[normalize-space()='Balanced Diet']
+    wait until element is visible   xpath=(//div[@class="v-responsive__sizer"])[9]
+#
+    wait until element is visible  id=input-564
+    Wait Until Element Is Clickable    id=input-564
+    clickAndWait   id=input-564
+    sleep  5
     click  xpath=//div[@id='__layout']/div/div[2]/div[2]/div/div/div[3]/button[2]/div
     click  xpath=//div[@id='__layout']/div/div/div/main/div/div/div[2]/button/div/p
     click  xpath=//div[@id='__layout']/div/div/header/div/nav[2]/a/div/span/span/span/span
@@ -40,5 +45,5 @@ ${testcase_spec}  None
 #    selectFrame    relative=parent
 #    click    xpath=//div[@id='__layout']/div/div/div/main/section/a/div/p
 
-    [Teardown]  Run Keywords  Add Result To Testrail Lys  Recorder Stop
+    [Teardown]  Run Keywords  Add Result To Testrail Lys  ${testcase_id}
 

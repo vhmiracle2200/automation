@@ -14,7 +14,7 @@ ${testcase_spec}
 2322_Buy simple product_in Fedshi android demo
 
   [Tags]   include
-  ${testcase_spec}   Get Testcase From Testrail By Id   2322
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Buy simple product_in Fedshi android demo  1  3
   
   Go To Shop Page
 
@@ -69,31 +69,15 @@ ${testcase_spec}
   wait until element is visible           //*[@class = 'android.widget.TextView' and (@text = 'عرض التفاصيل' or . = 'عرض التفاصيل') and @resource-id = 'com.fedshi.res.dev:id/view_detail']
   click element         //*[@class = 'android.widget.TextView' and (@text = 'عرض التفاصيل' or . = 'عرض التفاصيل') and @resource-id = 'com.fedshi.res.dev:id/view_detail']
   
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 
-2324_Order list can open or not_in Fedshi android demo
-
-  [Tags]   include
-  Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2324
-
-  Go To Shop Page
-
-  # Click on 'الطلبات'
-  Click Element         ${orderlist_button}
-  sleep  3s
-
-  # Orders must be shown
-  element should be visible    ${order_view_group}
-
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
 
 2325_Check_save_itemes _in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2325
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check save itemes in Fedshi android  1  3
   
   Go To Shop Page
 
@@ -120,13 +104,13 @@ ${testcase_spec}
   click element  ${toolbar_back_button}
   wait until element is visible  ${save_products_you}
 
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 2326_Check search function_in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2326
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check search function_in Fedshi android demo  1  3
   
   Go To Shop Page
 
@@ -146,13 +130,13 @@ ${testcase_spec}
     # Clear search area
   Input Text  ${search_field}  ${EMPTY}
   
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 2327_Check scroll down for load new products_in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2327
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check scroll down for load new products_in Fedshi android demo  1  3
   
   Go To Shop Page
 
@@ -164,13 +148,13 @@ ${testcase_spec}
   Swipe    376    1017    388    233
   element should be visible    ${founded_product_in_shop}
 
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 2328_Check the category works fine or not_in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2328
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check the category works fine or not_in Fedshi android demo  1  3
   
   Go To Shop Page
 
@@ -190,13 +174,13 @@ ${testcase_spec}
   # The product must not be shown in this category
   page should not contain element    ${founded_product_in_shop}
   
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 2329_Check the basket icon in shop page_in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2329
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check the basket icon in shop page_in Fedshi android demo  1  3
   
   Go To Shop Page
 
@@ -207,16 +191,14 @@ ${testcase_spec}
   # The product must be shown
   element should be visible    ${empty_image_in_shop}
 
-  click element  ${toolbar_back_button}
-  wait until element is visible  ${founded_product_in_shop}
-  
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 2330_Check the sub_category_in shop page_in Fedshi android demo
 
-  [Tags]    include
+  [Tags]    exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2330
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_shop_section_id}  Check the sub_category_in shop page_in Fedshi android demo  1  3
 
   Go To Shop Page
 
@@ -238,14 +220,17 @@ ${testcase_spec}
   sleep  3s
   page should not contain element    ${founded_product_in_shop}
 
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 ################################# Order view ##########
-2332_Check the created order parameters _in Fedshi android demo
-#  Depends on test  2322_Buy simple product_in Fedshi android demo
-  [Tags]    include
+
+2324_Order list can open or not_in Fedshi android demo
+
+  [Tags]   exclude
   Log  ${TEST NAME}
-  ${testcase_spec}   Get Testcase From Testrail By Id   2332
+  depends on test   2322_Buy simple product_in Fedshi android demo
+
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_order_section_id}  Order list can open or not  1  3
 
   Go To Shop Page
 
@@ -256,13 +241,32 @@ ${testcase_spec}
   # Orders must be shown
   element should be visible    ${order_view_group}
 
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
+
+2332_Check the created order parameters _in Fedshi android demo
+
+  [Tags]    exclude
+  Log  ${TEST NAME}
+  depends on test   2322_Buy simple product_in Fedshi android demo
+  ${testcase_id}   Create Testcase With Params   ${Fedshi_order_section_id}  Check the created order parameters _in Fedshi android demo  1  3
+
+  Go To Shop Page
+
+  # Click on 'الطلبات'
+  Click Element         ${orderlist_button}
+  sleep  3s
+
+  # Orders must be shown
+  wait until element is visible   ${order_view_group}
+  element should be visible    ${order_view_group}
+
   # Check order parameters
   element text should be  ${order_status_in_order_page}  قيد المعالجة
   element text should be  ${order_item_count_in_order_page}  1 منتج
   element text should be  ${order_commission_in_order_page}  ربحك 0 د.ع.
   element text should be  ${order_price_in_order_page}  150 د.ع.
 
-  [Teardown]  Run Keywords  Add Result To Testrail Fedshi
+  [Teardown]  Add Result To Testrail Fedshi  ${testcase_id}
 
 
 *** Keywords ***
