@@ -11,6 +11,8 @@ class BasePage(object):
     callbackTestPageUrl = 'https://web.demo.lys.ice.global/shop/products/balanced-diet/AFFTR'
     testEnvPageUrl = 'https://web.demo.lys.ice.global/shop/products/balanced-diet/AFFTR'
 
+
+
     def __init__(self, driver):
         self.driver = driver
 
